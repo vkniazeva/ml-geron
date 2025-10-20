@@ -1,0 +1,17 @@
+# Virtual environment
+geron-book-env/
+.env/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Data
+data/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+
