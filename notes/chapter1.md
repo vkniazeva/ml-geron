@@ -5,9 +5,9 @@
 Usually all ML projects can be built based on the following plan:
 
 1. Look at the big picture 
-   2. Business scope: task, target, application, focus
-   3. Current situation: process, costs, errors
-   4. ML model: task type, algorithm, data update, quality criteria
+   * Business scope: task, target, application, focus 
+   * Current situation: process, costs, errors 
+   * ML model: task type, algorithm, data update, quality criteria
 2. Get the data.
 3. Discover and visualize the data to gain insights.
 4. Prepare the data for Machine Learning algorithms.
