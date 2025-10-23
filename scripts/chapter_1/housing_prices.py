@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from zlib import crc32
+
+from scipy.stats import alpha
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
 
 
@@ -35,6 +37,7 @@ def fetch_housing_data(filename, chapter):
     except Exception as e:
         raise RuntimeError(f"Unexpected error reading {csv_path}: {e}")
 
+
 def get_data_info(dataset):
     """
     Prints short information for the given dataset
@@ -54,12 +57,14 @@ def get_data_info(dataset):
     # dataset.hist(bins=50, figsize=(20,15))
     # plt.show()
 
+
 def split_train_test(dataset, test_ratio):
     shuffled_indices = np.random.permutation(len(dataset))
     test_set_size = int(len(dataset) * test_ratio)
     test_indices = shuffled_indices[:test_set_size]
     train_indices = shuffled_indices[test_set_size:]
     return dataset.iloc[train_indices], dataset.iloc[test_indices]
+
 
 # def test_set_check(identifier, test_ratio):
 #     """
@@ -84,6 +89,28 @@ def split_train_test(dataset, test_ratio):
 #     in_test_set = ids.apply(lambda id_:test_set_check(id_, test_ratio))
 #     return data.loc[~in_test_set], data.loc[in_test_set]
 
+
+def stratify_dataset(dataset, feature):
+    """
+    Splits dataset by stratifying it by a given column
+
+    :param dataset: dataset to split (DataFrame)
+    :param feature: to stratify by (array)
+    :return: 2 datasets - train and test
+    """
+    split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
+    for train_index, test_index in split.split(dataset, feature):
+        strat_train_set = dataset.loc[train_index]
+        strat_test_set = dataset.loc[test_index]
+        return strat_train_set, strat_test_set
+    return None
+
+
+def explore_data(dataset):
+    housing_copy = dataset.copy()
+    housing_copy.plot(kind="scatter", x="longitude", y="latitude", alpha=0.1)
+    plt.show()
+
 if __name__ == "__main__":
     housing_filename = "housing.csv"
     housing_chapter = "chapter_1"
@@ -91,14 +118,19 @@ if __name__ == "__main__":
         housing = fetch_housing_data(housing_filename, housing_chapter)
         # housing_with_id = housing.reset_index()
         get_data_info(housing)
-        train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
+        # train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
         # train_set, test_set = split_train_test_by_id(housing_with_id, 0.2, "index")
         housing["income_cat"] = pd.cut(housing["median_income"],
                                        bins=[0., 1.5, 3.0, 4.5, 6., np.inf],
                                        labels=[1, 2, 3, 4, 5])
-        housing["income_cat"].hist()
-        plt.show()
-        print(test_set)
+        # housing["income_cat"].hist()
+
+        strat_train_set, strat_test_set = stratify_dataset(housing, housing["income_cat"])
+        # proportion = strat_test_set["income_cat"].value_counts()/len(strat_test_set)
+        for set_ in (strat_train_set, strat_test_set):
+            set_.drop("income_cat", axis=1, inplace=True)
+        explore_data(strat_train_set)
+
     except Exception as e:
         print(e)
 

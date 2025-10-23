@@ -8,14 +8,14 @@ Usually all ML projects can be built based on the following plan:
    * Business scope: task, target, application, focus 
    * Current situation: process, costs, errors 
    * ML model: task type, algorithm, data update, quality criteria
-2. Get the data.
-3. Discover and visualize the data to gain insights.
+2. Get the data:
     * checking dependencies, distribution
     * identifying the most important features
     * validate: data is representative?
-4. Prepare the data for Machine Learning algorithms.
     * cleaning up data: missing values, normalizing etc.
     * applying stratification
+3. Discover and visualize the data to gain insights.
+4. Prepare the data for Machine Learning algorithms.
 5. Select a model and train it.
 6. Fine-tune your model.
 7. Present your solution.
@@ -49,7 +49,7 @@ count, mean, std. min, percentiles, max)
 - hist() - matplotlit.pyplot - drawing a histogram: bin - detalization (higher -> more details),
 figsize - graph size (i.e. 20 - width, 15 - high)
 
-![histogram.png](assets/histogram.png)
+![histogram.png](../assets/chapter_1/histogram.png)
 
 - train_test_split() - sklearn.model_selection - supports a dataset splitting to
 a train and test ones. Params: dataset, test_size, random_state (repetitive split)
@@ -58,4 +58,13 @@ a train and test ones. Params: dataset, test_size, random_state (repetitive spli
 Parameters: data array, bins (number of intervals or bin edges),
 labels (optional names for the intervals).
 
-![histogram_income_cat.png](assets/histogram_income_cat.png)
+![histogram_income_cat.png](../assets/chapter_1/histogram_income_cat.png)
+
+- loc - pd - a pandas function for selecting data by labels or by boolean arrays
+
+- StratifiedShuffleSplit - sklearn.model_selection - creates train/test splits while preserving 
+the class distribution of the target variable. The split() method returns indices for stratified 
+random shuffling and partitioning of the data. Params StratifiedShuffleSplit: n_splits - number of sets to generate, 
+test_size, random_state. Split() expects dataset and column (array)
+
+- drop() - params: axis=1 for columns and 0 for raws, inplace = True (the same set)
