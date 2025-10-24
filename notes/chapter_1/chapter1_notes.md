@@ -68,3 +68,6 @@ random shuffling and partitioning of the data. Params StratifiedShuffleSplit: n_
 test_size, random_state. Split() expects dataset and column (array)
 
 - drop() - params: axis=1 for columns and 0 for raws, inplace = True (the same set)
+
+- select_dtypes() - selects only datatypes from given arguments i.e. include=["int64", "float64"] or include=[np.number],
+where np.number stands for all numerical types 

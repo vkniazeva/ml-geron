@@ -108,8 +108,14 @@ def stratify_dataset(dataset, feature):
 
 def explore_data(dataset):
     housing_copy = dataset.copy()
-    housing_copy.plot(kind="scatter", x="longitude", y="latitude", alpha=0.1)
-    plt.show()
+    # housing_copy.plot(kind="scatter", x="longitude", y="latitude", alpha=0.1)
+    # housing_copy.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4,
+    #                   s=housing_copy["population"]/100, label="population", figsize=(10,7),
+    #                   c="median_house_value", cmap=plt.get_cmap("jet"), colorbar=True)
+    numeric_data = housing_copy.select_dtypes(include=[np.number])
+    corr_matrix = numeric_data.corr()
+    print(corr_matrix["median_house_value"].sort_values(ascending=False))
+
 
 if __name__ == "__main__":
     housing_filename = "housing.csv"
@@ -117,7 +123,7 @@ if __name__ == "__main__":
     try:
         housing = fetch_housing_data(housing_filename, housing_chapter)
         # housing_with_id = housing.reset_index()
-        get_data_info(housing)
+        # get_data_info(housing)
         # train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
         # train_set, test_set = split_train_test_by_id(housing_with_id, 0.2, "index")
         housing["income_cat"] = pd.cut(housing["median_income"],
