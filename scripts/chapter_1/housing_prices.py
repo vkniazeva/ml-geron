@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from zlib import crc32
+from pandas.plotting import scatter_matrix
 
 from scipy.stats import alpha
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
@@ -112,10 +113,17 @@ def explore_data(dataset):
     # housing_copy.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4,
     #                   s=housing_copy["population"]/100, label="population", figsize=(10,7),
     #                   c="median_house_value", cmap=plt.get_cmap("jet"), colorbar=True)
+
+    attributes = ["median_house_value", "median_income", "total_rooms", "housing_median_age"]
+    scatter_matrix(housing_copy[attributes], figsize=(12,8))
+    housing_copy.plot(kind="scatter", x="median_income", y="median_house_value", alpha=0.1)
+
+    housing_copy["rooms_per_household"] = housing_copy["total_rooms"] / housing_copy["households"]
+    housing_copy["bedrooms_per_household"] = housing_copy["total_bedrooms"] / housing_copy["total_rooms"]
+    housing_copy["population_per_household"] = housing_copy["population"] / housing_copy["households"]
     numeric_data = housing_copy.select_dtypes(include=[np.number])
     corr_matrix = numeric_data.corr()
     print(corr_matrix["median_house_value"].sort_values(ascending=False))
-
 
 if __name__ == "__main__":
     housing_filename = "housing.csv"

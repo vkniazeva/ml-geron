@@ -71,3 +71,6 @@ test_size, random_state. Split() expects dataset and column (array)
 
 - select_dtypes() - selects only datatypes from given arguments i.e. include=["int64", "float64"] or include=[np.number],
 where np.number stands for all numerical types 
+
+- scatter_matrix - pandas.plotting - scatter matrix for selected attributes, where as diagonal histograms and 
+scatter plots for pair relationships in other cells are plotted. Params: a list of selected numeric features, figsize - display size 

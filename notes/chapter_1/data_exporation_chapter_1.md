@@ -67,3 +67,54 @@ latitude             -0.142673
 From the table above, it is clear that there is a strong positive correlation between 
 median_house_value and median_income: the higher the income, the higher the median house price.
 
+### Visualizing correlations using scatter matrix
+
+To visualize relationships between multiple features, we can use scatter_matrix from pandas.plotting.
+
+Since only a few features show noticeable correlation with the target, we focus on the top 4 attributes:
+
+![Scatter matrix income.png](../assets/chapter_1/scatter_matrix_income.png)
+
+The scatter plots show that median_income has the strongest influence on the target variable:
+as income increases, so does housing price.
+
+The zoomed-in plot demonstrates that the data points follow a clear upward trend.
+It also reveals several horizontal lines (e.g., at $450k, $350k), which indicate capped values in the dataset.
+These outlier-like rows do not represent real market variety 
+and might be removed or handled separately during data cleaning.
+
+![Scatter plot income-target.png](../assets/chapter_1/scatter_plot_income_target.png)
+
+## Feature Engineering
+
+Some attributes are not informative in their raw form (e.g., total_rooms depends heavily on district population).
+By combining features, we can create more meaningful ratios:
+
+rooms_per_household = total_rooms / households
+
+bedrooms_per_household = total_bedrooms / total_rooms
+
+population_per_household = population / households
+
+After adding these features, the updated correlation values show a new significant dependency:
+
+```
+median_house_value          1.000000
+median_income               0.687151
+rooms_per_household         0.146255
+total_rooms                 0.135140
+housing_median_age          0.114146
+households                  0.064590
+total_bedrooms              0.047781
+population_per_household   -0.021991
+population                 -0.026882
+longitude                  -0.047466
+latitude                   -0.142673
+bedrooms_per_household     -0.259952
+```
+
+The negative correlation of bedrooms_per_household suggests that districts with fewer bedrooms
+per household tend to have higher housing prices.
+
+
+
