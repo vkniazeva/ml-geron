@@ -4,9 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from zlib import crc32
 from pandas.plotting import scatter_matrix
-
 from scipy.stats import alpha
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
+from sklearn.impute import SimpleImputer
 
 
 def fetch_housing_data(filename, chapter):
@@ -125,6 +125,19 @@ def explore_data(dataset):
     corr_matrix = numeric_data.corr()
     print(corr_matrix["median_house_value"].sort_values(ascending=False))
 
+
+def prepare_dataset_for_ml(dataset):
+     dataset_num = dataset.drop("ocean_proximity", axis=1)
+     imputer = SimpleImputer(strategy="median")
+     imputer.fit(dataset_num)
+     print(dataset_num.median().values)
+     print(imputer.statistics_)
+     X = imputer.transform(dataset_num)
+     dataset_tr = pd.DataFrame(X, columns=dataset_num.columns, index=dataset_num.index)
+     print(dataset_tr)
+
+
+
 if __name__ == "__main__":
     housing_filename = "housing.csv"
     housing_chapter = "chapter_1"
@@ -132,8 +145,11 @@ if __name__ == "__main__":
         housing = fetch_housing_data(housing_filename, housing_chapter)
         # housing_with_id = housing.reset_index()
         # get_data_info(housing)
+
+        # simple splitting w/o stratification
         # train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
         # train_set, test_set = split_train_test_by_id(housing_with_id, 0.2, "index")
+
         housing["income_cat"] = pd.cut(housing["median_income"],
                                        bins=[0., 1.5, 3.0, 4.5, 6., np.inf],
                                        labels=[1, 2, 3, 4, 5])
@@ -143,7 +159,13 @@ if __name__ == "__main__":
         # proportion = strat_test_set["income_cat"].value_counts()/len(strat_test_set)
         for set_ in (strat_train_set, strat_test_set):
             set_.drop("income_cat", axis=1, inplace=True)
-        explore_data(strat_train_set)
+        # explore_data(strat_train_set)
+
+    #     preparing dataset for ML algorithms
+        housing = strat_train_set.drop("median_house_value", axis=1)
+        housing_labels = strat_train_set["median_house_value"].copy()
+        prepare_dataset_for_ml(housing)
+
 
     except Exception as e:
         print(e)
