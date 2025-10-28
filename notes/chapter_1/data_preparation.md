@@ -19,3 +19,5 @@ A more robust approach is to use SimpleImputer from Scikit-Learn.
 It can automatically compute replacement values for selected attributes 
 and apply them consistently.
 
+## Categorical data processing
+
