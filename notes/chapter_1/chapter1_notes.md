@@ -13,7 +13,7 @@ Usually all ML projects can be built based on the following plan:
     * identifying the most important features
     * validate: data is representative?
     * applying stratification
-3. Discover and visualize the data to gain insights. [Data Exploration](data_exploration_chapter_1.md)
+3. Discover and visualize the data to gain insights. [Data Exploration](data_exploration.md)
    * scatter matrix visualization
    * correlation matrix (target variable vs others)
    * scatter matrix with selected features
@@ -106,4 +106,14 @@ Params: strategy (mean, median, most_frequent, constant - required: fill_value).
   * fit() - computes replacement statistics and stores in statistics_. Param: dataset
   * transform() - replaces NaNs using stored statistics
   * result is NumPy array → convert back: pd.DataFrame(X, columns=dataset.columns, index=dataset.index)
+* OrdinalEncoder - sklearn.preprocessing - converts categorical features to integer values by 
+assigning a unique integer to each category. Suitable when the categories have an inherent order (e.g., “bad”, “average”, “good”).
+  * fit_transform() - params: array-like or DataFrame - [[]] -> output: NumPy array of integers
+  * categories_ - list of arrays, each containing the categories seen during fitting (one array per encoded feature).
+* OneHotEncoder - sklearn.preprocessing - Encodes categorical features as a one-hot (binary) sparse matrix,
+creating one column per unique category.
+  * fit_transform() - params: array-like or DataFrame -> output: SciPy matrix (NumPy array -> toarray()
+  * categories_ - list of arrays, each representing category labels per encoded feature.
+* c_ - numpy - concatenates columns horizontally - returns numpy array
+
 
