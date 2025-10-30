@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 
 from scripts.chapter_1.data_exploration import explore_data
-from scripts.chapter_1.data_loading import fetch_housing_data
+from scripts.chapter_1.data_loading import fetch_file_data
 from scripts.chapter_1.data_preparation import prepare_dataset_for_ml
 from scripts.chapter_1.data_splitting import stratify_dataset
 
@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     housing_filename = "housing.csv"
     housing_chapter = "chapter_1"
-    housing = fetch_housing_data(housing_filename, housing_chapter)
+    housing = fetch_file_data(housing_filename, housing_chapter)
     print("Data loaded")
 
     # indexing

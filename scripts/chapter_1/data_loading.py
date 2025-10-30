@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-def fetch_housing_data(filename, chapter):
+def fetch_file_data(filename, chapter):
     """
     Load housing data from the assets folder.
 

@@ -115,5 +115,18 @@ creating one column per unique category.
   * fit_transform() - params: array-like or DataFrame -> output: SciPy matrix (NumPy array -> toarray()
   * categories_ - list of arrays, each representing category labels per encoded feature.
 * c_ - numpy - concatenates columns horizontally - returns numpy array
+* Pipeline — sklearn.pipeline — allows applying sequentially a list of transformers and a final estimator to preprocess and model the data
+  * params: list of tuples (name, estimator)
+    * name — must be unique and cannot contain “__” (used for parameter access in inner estimators)
+  * output: result of the final estimator — usually a NumPy array or model predictions
+* ColumnTransformer - sklearn.compose - allows applying different transformations to different subsets of features. 
+Supports DataFrame
+  * params: 
+    * list of tuples: (name, transformer, list_of_columns)
+    * remainder: 
+      * drop (default) - dropping columns, 
+      * passthrough - no changes, 
+      * Pipeline() or transformer to the rest i.e. ColumnTransformer([...], remainder=StandardScaler())
+  * output: NumPy matrix — dense (numpy.ndarray) or sparse (scipy.sparse.csr_matrix), depending on transformers used
 
 
