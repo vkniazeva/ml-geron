@@ -1,7 +1,6 @@
 from pandas.plotting import scatter_matrix
 import numpy as np
-import matplotlib.pyplot as plt
-from transformer import CombinedAttributesAdder
+
 
 def get_data_info(dataset):
     """

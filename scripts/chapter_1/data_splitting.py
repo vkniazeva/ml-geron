@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
 from zlib import crc32
+import pandas as pd
 
 # def test_set_check(identifier, test_ratio):
 #     """
@@ -46,6 +47,25 @@ def stratify_dataset(dataset, feature):
         strat_test_set = dataset.loc[test_index]
         return strat_train_set, strat_test_set
     return None
+
+def prepare_train_test(housing):
+    housing["income_cat"] = pd.cut(
+        housing["median_income"],
+        bins=[0., 1.5, 3.0, 4.5, 6., np.inf],
+        labels=[1, 2, 3, 4, 5]
+    )
+
+    strat_train_set, strat_test_set = stratify_dataset(housing, housing["income_cat"])
+
+    for set_ in (strat_train_set, strat_test_set):
+        set_.drop("income_cat", axis=1, inplace=True)
+
+    X_train = strat_train_set.drop("median_house_value", axis=1)
+    y_train = strat_train_set["median_house_value"].copy()
+    X_test = strat_test_set.drop("median_house_value", axis=1)
+    y_test = strat_test_set["median_house_value"].copy()
+
+    return X_train, X_test, y_train, y_test
 
 
 
