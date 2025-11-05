@@ -19,4 +19,4 @@ def build_full_pipeline(data):
         ("num", num_pipeline, num_features),
         ("cat", OneHotEncoder(), cat_features),
     ])
-    return full_pipeline
+    return full_pipeline, num_features

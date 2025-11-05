@@ -42,5 +42,10 @@ class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
         else:
             return numpy.c_[X, rooms_per_household, population_per_household]
 
-
-
+    def get_feature_names_out(self, input_features=None):
+        if input_features is None:
+            input_features = []
+        extra_attrs = ["rooms_per_hhold", "population_per_hhold"]
+        if self.add_bedrooms_per_room:
+            extra_attrs.append("bedrooms_per_room")
+        return numpy.array(list(input_features) + extra_attrs)

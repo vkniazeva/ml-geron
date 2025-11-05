@@ -17,6 +17,7 @@ def execute_grid_search(X_train, y_train):
 
     grid_search.fit(X_train, y_train)
     print_search_results("Grid Search",grid_search)
+    return grid_search
 
 
 def execute_random_search(X_train, y_train):
@@ -30,6 +31,7 @@ def execute_random_search(X_train, y_train):
                                        scoring='neg_mean_squared_error', random_state=42, return_train_score=True)
     random_search.fit(X_train, y_train)
     print_search_results("Randomized Search", random_search)
+    return random_search
 
 
 def print_search_results(search_name,search_model):
@@ -42,6 +44,7 @@ def print_search_results(search_name,search_model):
     cvres = search_model.cv_results_
     for mean_score, params in zip(cvres["mean_test_score"], cvres["params"]):
         print(f"{np.sqrt(-mean_score):.2f}", params)
+
 
 
 

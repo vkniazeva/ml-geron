@@ -142,4 +142,20 @@ Supports DataFrame
   * params:
     * obj (model)
     * filename
+* named_transformers_ - ColumnTransformer attribute allowing access to transformers by name
+  * returns a transformer applied to a specific feature
+* transformer.categories_ - Transformer attribute keeping a category list for every feature 
+  * each categorical value presents a separate column
+  * returns an array of arrays with all categorical encodings (for OneHotEncoder)
+* get_feature_names_out() - ColumnTransformer - list of all feature names incl. categorical representation by column
+  * returns all feature names:
+    * initial numerical features
+    * new features created manually or with transformers
+    * all one-hot encoded categories
+* stats.t.interval - scipy.stats- computing a confidence interval
+  * params:
+    * confidence (e.g. 0.95)
+    * degrees of freedom (n-1)
+    * loc = mean value(mean(errors))
+    * scale = standard error of the mean (stats.sem(errors))
 
