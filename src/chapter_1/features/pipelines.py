@@ -3,7 +3,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
-from scripts.chapter_1.features.transformer import CombinedAttributesAdder
+from src.chapter_1.features.transformer import CombinedAttributesAdder
 
 def build_full_pipeline(data):
     num_features = list(data.select_dtypes(include=[np.number]).columns)

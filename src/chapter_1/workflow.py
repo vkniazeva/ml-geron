@@ -1,10 +1,10 @@
-from scripts.chapter_1.data_loading import fetch_file_data
-from scripts.chapter_1.data_splitting import prepare_train_test
-from scripts.chapter_1.features.pipelines import build_full_pipeline
-from scripts.chapter_1.model.train import *
-from scripts.chapter_1.model.evaluate_model import evaluate_rmse, evaluate_score, evaluate_cross_validation, \
+from src.chapter_1.data_loading import fetch_file_data
+from src.chapter_1.data_splitting import prepare_train_test
+from src.chapter_1.features.pipelines import build_full_pipeline
+from src.chapter_1.model.train import *
+from src.chapter_1.model.evaluate_model import evaluate_rmse, evaluate_score, evaluate_cross_validation, \
     evaluate_features_importance, evaluate_confidence_interval
-from scripts.chapter_1.model.tune_model import *
+from src.chapter_1.model.tune_model import *
 from joblib import dump
 from pathlib import Path
 
