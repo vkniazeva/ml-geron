@@ -1,12 +1,14 @@
 from sklearn.datasets import fetch_openml
-import matplotlib as mpl
+
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.model_selection import train_test_split
+from sklearn.utils import shuffle
+
 
 def load_data(points_number, is_test_split=True):
-    mnist = fetch_openml('mnist_784',version=1)
+    mnist = fetch_openml('mnist_784',version=1, as_frame=False)
     X, y = mnist["data"], mnist["target"]
+    X, y = shuffle(X, y, random_state=42)
     y = y.astype(np.int8)
     if is_test_split:
         X_train, X_test, y_train, y_test = X[:points_number], X[points_number:], y[:points_number], y[points_number:]
