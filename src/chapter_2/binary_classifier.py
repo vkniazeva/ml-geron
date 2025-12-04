@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
 from src.chapter_2.data_loading import *
 from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import StratifiedKFold
@@ -6,7 +9,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.base import BaseEstimator
 from sklearn.model_selection import cross_val_predict
 from sklearn.metrics import confusion_matrix, f1_score
-from sklearn.metrics import precision_score, recall_score
+from sklearn.metrics import precision_score, recall_score, precision_recall_curve
 
 def build_classifier():
     X_train, X_test, y_train, y_test = load_data(60000)
@@ -59,15 +62,44 @@ def calculate_model_accuracy(model, X_train, y_train):
     print("{:.2f}".format(f1_score(y_train, y_train_pred)))
 
 
+def make_decision(model, X_train):
+    y_scores = model.decision_function([X_train[15]])
+    print(f"INSTANCE SCORE")
+    print(y_scores)
+    threshold = 8000
+    print(f"PREDICTION")
+    y_digit_pred = (y_scores > threshold)
+    print(y_digit_pred)
+
+def build_trade_off_curve(model, X_train, y_train):
+    y_scores = cross_val_predict(model, X_train, y_train, cv=3, method="decision_function")
+    precision, recalls, thresholds = precision_recall_curve(y_train, y_scores)
+    print("90% precision threshold")
+    threshold_90_precision = thresholds[np.argmax(precision >= 0.90)]
+    print(threshold_90_precision)
+    plt.plot(thresholds, precision[:-1],"b--", label="precision")
+    plt.plot(thresholds, recalls[:-1], "g--", label="recall")
+    plt.xlabel("Threshold")
+    plt.ylabel("Score")
+    plt.title("Precision/Recall Trade-off")
+    plt.legend()
+    plt.grid(True)
+    plt.ylim([0, 1])
+    plt.show()
+
+def build_custom_predictions(model, )
+
+
 def main():
     model, X_train, X_test, y_train_5, y_test_5 = build_classifier()
-    # print("CUSTOM CROSS VALIDATION")
-    # validate_cross_custom(model, X_train, y_train_5)
+    print("CUSTOM CROSS VALIDATION")
+    validate_cross_custom(model, X_train, y_train_5)
     print("BUILT IN CROSS VALIDATION")
     validate_cross_library(model, X_train, y_train_5)
     print("MODEL ACCURACY METRICS")
     calculate_model_accuracy(model, X_train, y_train_5)
-
+    make_decision(model, X_train)
+    build_trade_off_curve(model, X_train, y_train_5)
 
 
 if __name__ == "__main__":

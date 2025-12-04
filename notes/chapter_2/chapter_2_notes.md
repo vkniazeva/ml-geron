@@ -69,8 +69,32 @@ or
 
 TP / (TP + (FN + FP) / 2)
 
+
+### Precision/recall trade off
 Precision vs. Recall Trade-off means that improving precision often reduces recall, and vice versa. 
 The choice of which metric to prioritize depends on the application context.
+
+As an example of precision/recall trade off SGDClassifier decision threshold behavior can be mentioned.
+Usually such a classifier relies on a specific decision boarder or decision threshold, that is computed as a sum
+of scores computed by the model. Based on this point amount particular instances are classified as True (higher)
+and False (below). With the increase of the threshold, precision value increases respectively, but recall drops correspondingly.
+
+Sklearn library does not support setting the threshold value directly but provides access to the point amounts. 
+A decision_function() method can be used to get a score. Then a custom prediction can be set by comparing the actual
+score against a new introduced threshold.
+
+![Precision/recall trade off.png](trade_off.png)
+
+As can be seen from the graph recall drops with the increase of a threshold, due to increasing of true positives while
+retaining the same true positives. This explains the smoothness of the recall curve.
+
+Bumps in the curve of precision with an increase of a threshold can be explained by the possibility of miss classifying a 
+true positive. Because with the increased threshold, true positives can be qualified as false negatives.
+In this case precision value can decrease respectively.
+
+Precision drops significantly with the recall of 80%. 
+
+
 
 
 ## Useful Python insights
