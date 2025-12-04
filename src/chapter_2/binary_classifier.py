@@ -73,21 +73,28 @@ def make_decision(model, X_train):
 
 def build_trade_off_curve(model, X_train, y_train):
     y_scores = cross_val_predict(model, X_train, y_train, cv=3, method="decision_function")
-    precision, recalls, thresholds = precision_recall_curve(y_train, y_scores)
+    precision, recall, thresholds = precision_recall_curve(y_train, y_scores)
+    prec = precision[:-1]
     print("90% precision threshold")
-    threshold_90_precision = thresholds[np.argmax(precision >= 0.90)]
+    threshold_90_precision = thresholds[np.argmax(prec >= 0.90)]
     print(threshold_90_precision)
     plt.plot(thresholds, precision[:-1],"b--", label="precision")
-    plt.plot(thresholds, recalls[:-1], "g--", label="recall")
+    plt.plot(thresholds, recall[:-1], "g--", label="recall")
     plt.xlabel("Threshold")
     plt.ylabel("Score")
     plt.title("Precision/Recall Trade-off")
     plt.legend()
     plt.grid(True)
     plt.ylim([0, 1])
-    plt.show()
+    # plt.show()
+    return y_scores, threshold_90_precision
 
-def build_custom_predictions(model, )
+def build_custom_predictions(y_train, scores, threshold):
+    y_train_pred = (scores >= threshold)
+    print("PRECISION WITH A NEW THRESHOLD")
+    print("{:.3f}".format(precision_score(y_train, y_train_pred)))
+    print("RECALL WITH A NEW THRESHOLD")
+    print("{:.3f}".format(recall_score(y_train, y_train_pred)))
 
 
 def main():
@@ -99,8 +106,9 @@ def main():
     print("MODEL ACCURACY METRICS")
     calculate_model_accuracy(model, X_train, y_train_5)
     make_decision(model, X_train)
-    build_trade_off_curve(model, X_train, y_train_5)
-
+    scores, threshold = build_trade_off_curve(model, X_train, y_train_5)
+    print("90% PRECISION THRESHOLD")
+    build_custom_predictions(y_train_5, scores, threshold)
 
 if __name__ == "__main__":
     main()

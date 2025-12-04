@@ -71,30 +71,42 @@ TP / (TP + (FN + FP) / 2)
 
 
 ### Precision/recall trade off
-Precision vs. Recall Trade-off means that improving precision often reduces recall, and vice versa. 
+Precision vs. Recall trade-off means that improving precision often reduces recall, and vice versa.
 The choice of which metric to prioritize depends on the application context.
 
-As an example of precision/recall trade off SGDClassifier decision threshold behavior can be mentioned.
-Usually such a classifier relies on a specific decision boarder or decision threshold, that is computed as a sum
-of scores computed by the model. Based on this point amount particular instances are classified as True (higher)
-and False (below). With the increase of the threshold, precision value increases respectively, but recall drops correspondingly.
+As an example of this trade-off, how the SGDClassifier uses a decision threshold can be considered.
+Usually, such a classifier computes a score (e.g. using decision_function()), 
+and then classifies an instance as True if the score is above the threshold, and False if it is below.
 
-Sklearn library does not support setting the threshold value directly but provides access to the point amounts. 
-A decision_function() method can be used to get a score. Then a custom prediction can be set by comparing the actual
-score against a new introduced threshold.
+By increasing the threshold:
+
+- Precision tends to increase (fewer false positives),
+- But recall decreases (more false negatives).
+
+Scikit-learn does not allow setting the decision threshold directly, but it gives access to the raw scores.
+So decision_function() can be used to get the scores and then create custom predictions by comparing those scores to a new threshold.
 
 ![Precision/recall trade off.png](trade_off.png)
 
-As can be seen from the graph recall drops with the increase of a threshold, due to increasing of true positives while
-retaining the same true positives. This explains the smoothness of the recall curve.
+As can be seen from the graph, recall decreases smoothly as the threshold increases.
+This happens because raising the threshold can only remove instances from the positive predictions — it never adds new ones. 
+So the number of true positives can only stay the same or go down, which makes recall decrease monotonically (hence the smooth curve).
 
-Bumps in the curve of precision with an increase of a threshold can be explained by the possibility of miss classifying a 
-true positive. Because with the increased threshold, true positives can be qualified as false negatives.
-In this case precision value can decrease respectively.
+On the other hand, the precision curve is bumpier.
+This is because when we raise the threshold, we might remove a true positive (which lowers precision) or a false positive (which raises precision).
+So precision can go up or down at different thresholds — which creates the "bumps" on the curve.
 
-Precision drops significantly with the recall of 80%. 
+From the graph, we can also see that precision drops significantly once recall goes above 80%.
 
+To choose a threshold for a specific goal (e.g. 90% precision), np.argmax() can be used to find the first index where precision ≥ 0.90, 
+and then get the corresponding threshold value (e.g. 5437).
 
+After applying this threshold and making custom predictions:
+
+- Precision = 90.0%
+- Recall = 62.6%
+
+This means that among all instances predicted as "positive", 90% were correct, but the model only found 63% of all actual positive cases.
 
 
 ## Useful Python insights
