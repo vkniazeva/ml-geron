@@ -108,10 +108,47 @@ After applying this threshold and making custom predictions:
 
 This means that among all instances predicted as "positive", 90% were correct, but the model only found 63% of all actual positive cases.
 
+### ROC curve
+
+A ROC curve, an abbreviation from Receiver Operating Characteristic, represents the relationship between Recall (True Positive Rate, TPR)
+and False Positive Rate (FPR). FPR is computed as (1 - Specificity), where Specificity is the True Negative Rate (TNR). 
+
+Formula: FPR = 1 − TNR
+
+The ROC curve plots TPR vs. FPR (not TPR / FPR—the curve is a graph, not a ratio).
+The roc_curve method from sklearn.metrics can be used to compute the TPR, FPR, and corresponding thresholds.
+
+![ROC_curve.png](roc_curve_sgd.png)
+
+As can be seen from the graph, the same trade-off pattern as in the precision-recall curve is typical for the ROC curve as well: 
+the higher the recall (TPR), the more the model misclassifies negatives as positives (higher FPR). 
+The best-performing models have an ROC curve that tends toward the upper-left corner of the plot.
+
+To compare different classifiers, the AUC (Area Under the Curve) metric can be used. An ideal model has an AUC of 1.0, while
+a random classifier scores 0.5. This value can be computed using roc_auc_score from sklearn.metrics.
+
+A precision-recall curve (PR) is particularly useful when dealing with imbalanced datasets (rare positive instances) 
+or when false positives are more critical than false negatives (e.g., spam detection).
+In contrast, the ROC curve tends to be more informative and reliable for balanced or moderately imbalanced classification tasks.
+
+![ROC for random forest and SGD.png](roc_curve_2_models.png)
+
+As can be seen from the graph above, the Random Forest model performs better, as its curve is closer to the upper-left corner. 
+The AUC values confirm this: 0.962 (SGD) vs. 0.998 (Random Forest). It would also be useful to compute additional accuracy metrics 
+(precision, recall, F1) for the Random Forest model to complete the evaluation.
 
 ## Useful Python insights
 
 - to_numpy() - conversing an object to a np.ndarray. If from DataFrame, column names are removed
 - reshape() - taking np.ndarray array and changing it to a 2D array of a defined size
 - imshow() - creating an image, cmap - colormap ("binary" - black and white)
-
+- cross_val_predict() - generate cross-validated estimates for each input data point (sklearn.model_selection)
+- confusion_matrix() - calculate a confusion matrix (sklearn.metrics)
+- precision_score() - calculates precision value (sklearn.metrics)
+- recall_score() - calculates recall value (sklearn.metrics)
+- f1_score() - calculates f1 value (sklearn.metrics)
+- precision_recall_curve() - plot a PR curve for given labels and scores (sklearn.metrics)
+- np.argmax() - returns the indices of the maximum values along an axis
+- roc_curve() - plot a ROC curve for given labels and scores (sklearn.metrics)
+- predict_proba() - array of rows as instances and columns as classes filled with probabilities of instance to belong to a given class
+- roc_auc_score() - calculates an area under curve (sklearn.metrics)

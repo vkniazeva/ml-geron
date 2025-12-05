@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8881506e-a6fa-408c-8d33-71b858d36287" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/chapter_2/cross_validation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notes/chapter_2/roc_curve_2_models.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/notes/chapter_2/roc_curve_sgd.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/chapter_2/chapter_2_notes.md" beforeDir="false" afterPath="$PROJECT_DIR$/notes/chapter_2/chapter_2_notes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chapter_2/binary_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/chapter_2/binary_classifier.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,30 +49,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.binary_classifier.executor": "Run",
-    "Python.data_exploring.executor": "Run",
-    "Python.data_loading.executor": "Run",
-    "Python.evaluate_model.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.transformer.executor": "Run",
-    "Python.tune_model.executor": "Run",
-    "Python.workflow.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/viktoriiakniazeva/ml-geron-clean",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.binary_classifier.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_exploring.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_loading.executor&quot;: &quot;Run&quot;,
+    &quot;Python.evaluate_model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.transformer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tune_model.executor&quot;: &quot;Run&quot;,
+    &quot;Python.workflow.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/viktoriiakniazeva/ml-geron-clean&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/chapter_2" />
@@ -78,6 +81,29 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="ml-geron-clean" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="ml-geron-clean" />
       <option name="ENV_FILES" value="" />
@@ -121,7 +147,8 @@
       <workItem from="1762114277812" duration="35481000" />
       <workItem from="1762611787890" duration="667000" />
       <workItem from="1762691495413" duration="496000" />
-      <workItem from="1762694940277" duration="13839000" />
+      <workItem from="1762694940277" duration="46911000" />
+      <workItem from="1764972136768" duration="4109000" />
     </task>
     <servers />
   </component>
@@ -130,12 +157,12 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ml_geron_clean$main.coverage" NAME="main Coverage Results" MODIFIED="1762718180410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ml_geron_clean$binary_classifier.coverage" NAME="binary_classifier Coverage Results" MODIFIED="1762814405853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/chapter_2" />
+    <SUITE FILE_PATH="coverage/ml_geron_clean$binary_classifier.coverage" NAME="binary_classifier Coverage Results" MODIFIED="1764975325551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/chapter_2" />
     <SUITE FILE_PATH="coverage/ml_geron_clean$evaluate_model.coverage" NAME="evaluate_model Coverage Results" MODIFIED="1762380304656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts/chapter_1/model" />
     <SUITE FILE_PATH="coverage/ml_geron_clean$data_exploring.coverage" NAME="data_exploring Coverage Results" MODIFIED="1762722935479" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/chapter_2" />
     <SUITE FILE_PATH="coverage/ml_geron_clean$transformer.coverage" NAME="transformer Coverage Results" MODIFIED="1762375700703" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts/chapter_1/features" />
     <SUITE FILE_PATH="coverage/ml_geron_clean$data_loading.coverage" NAME="data_loading Coverage Results" MODIFIED="1762810197407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/chapter_2" />
-    <SUITE FILE_PATH="coverage/ml_geron_clean$workflow.coverage" NAME="workflow Coverage Results" MODIFIED="1762471326181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts/chapter_1" />
-    <SUITE FILE_PATH="coverage/ml_geron_clean$tune_model.coverage" NAME="tune_model Coverage Results" MODIFIED="1762208662923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts/chapter_1/model" />
+    <SUITE FILE_PATH="coverage/ml_geron_clean$workflow.coverage" NAME="workflow Coverage Results" MODIFIED="1763313504223" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/chapter_1" />
+    <SUITE FILE_PATH="coverage/ml_geron_clean$tune_model.coverage" NAME="tune_model Coverage Results" MODIFIED="1763313495081" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/chapter_1/model" />
   </component>
 </project>
