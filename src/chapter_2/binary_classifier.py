@@ -80,15 +80,14 @@ def build_trade_off_curve(model, X_train, y_train):
     print("90% precision threshold")
     threshold_90_precision = thresholds[np.argmax(prec >= 0.90)]
     print(threshold_90_precision)
-    # plt.plot(thresholds, precision[:-1],"b--", label="precision")
-    # plt.plot(thresholds, recall[:-1], "g--", label="recall")
-    # plt.xlabel("Threshold")
-    # plt.ylabel("Score")
-    # plt.title("Precision/Recall Trade-off")
-    # plt.legend()
-    # plt.grid(True)
-    # plt.ylim([0, 1])
-    # plt.show()
+    plt.plot(thresholds, precision[:-1],"b--", label="precision")
+    plt.plot(thresholds, recall[:-1], "g--", label="recall")
+    plt.xlabel("Threshold")
+    plt.ylabel("Score")
+    plt.title("Precision/Recall Trade-off")
+    plt.legend()
+    plt.grid(True)
+    plt.ylim([0, 1])
     return y_scores, threshold_90_precision
 
 def build_custom_predictions(y_train, scores, threshold):
@@ -124,22 +123,20 @@ def build_random_forest(X_train, y_train):
 def main():
     model, X_train, X_test, y_train_5, y_test_5 = build_classifier()
     print("CUSTOM CROSS VALIDATION")
-    # validate_cross_custom(model, X_train, y_train_5)
-    # print("BUILT IN CROSS VALIDATION")
-    # validate_cross_library(model, X_train, y_train_5)
-    # print("MODEL ACCURACY METRICS")
-    # calculate_model_accuracy(model, X_train, y_train_5)
-    # make_decision(model, X_train)
+    validate_cross_custom(model, X_train, y_train_5)
+    print("BUILT IN CROSS VALIDATION")
+    validate_cross_library(model, X_train, y_train_5)
+    print("MODEL ACCURACY METRICS")
+    calculate_model_accuracy(model, X_train, y_train_5)
+    make_decision(model, X_train)
     scores, threshold = build_trade_off_curve(model, X_train, y_train_5)
-    # print("90% PRECISION THRESHOLD")
-    # build_custom_predictions(y_train_5, scores, threshold)
+    print("90% PRECISION THRESHOLD")
+    build_custom_predictions(y_train_5, scores, threshold)
     build_roc_curve(y_train_5, scores, "SGD")
     scores_forest, forest_classifier = build_random_forest(X_train, y_train_5)
     build_roc_curve(y_train_5, scores_forest, "Random Forest")
     plt.show()
     calculate_model_accuracy(forest_classifier, X_train, y_train_5)
-
-
 
 if __name__ == "__main__":
     main()
