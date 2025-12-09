@@ -137,6 +137,37 @@ As can be seen from the graph above, the Random Forest model performs better, as
 The AUC values confirm this: 0.962 (SGD) vs. 0.998 (Random Forest). It would also be useful to compute additional accuracy metrics 
 (precision, recall, F1) for the Random Forest model to complete the evaluation.
 
+## Multiclass classifiers (multinominal)
+
+Some classifiers — such as SGDClassifier, Random Forest, and Naive Bayes — are natively multiclass: they can handle 
+multiple classes directly without any modification.
+
+In contrast, logistic regression and SVM (as implemented in sklearn.svm.SVC) are binary classifiers at their core. 
+However, they can still be used for multiclass problems by combining multiple binary classifiers using one of two strategies:
+
+
+- One-versus-Rest (OvR), also called One-versus-All (OvA):
+    - Train one binary classifier per class, where each classifier distinguishes one class vs. all others.
+    - For N classes → N classifiers. 
+    - At prediction time, the class with the highest decision score is selected.
+- One-versus-One (OvO):
+  - Train a binary classifier for every pair of classes.
+  - For N classes → N*(N-1)/2 classifiers. 
+  - At prediction time, each classifier "votes" for one of the two classes, and the class with the most votes wins. 
+  - The raw scores from each pair classifier can be accessed via decision_function().
+
+In scikit-learn:
+
+- SVC() uses OvO by default for multiclass problems.
+- LogisticRegression, SGDClassifier, and LinearSVC use OvR by default.
+- To enforce either strategy using wrapper classes:
+  - OneVsRestClassifier(LogisticRegression())
+  - OneVsOneClassifier(SVC())
+  - Alternatively, for SVC: decision_function_shape='ovr' or 'ovo' (default is 'ovr' in newer versions).
+
+For RandomForest and NaiveBayes predict_proba() instead of decision_function() are used.
+
+
 ## Useful Python insights
 
 - to_numpy() - conversing an object to a np.ndarray. If from DataFrame, column names are removed
