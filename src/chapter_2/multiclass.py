@@ -1,5 +1,7 @@
+import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.model_selection import cross_val_score
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import cross_val_score, cross_val_predict
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
@@ -10,10 +12,7 @@ from sklearn.multiclass import  OneVsOneClassifier
 
 
 def build_svm(X_train, y_train, some_digit):
-    svm_classifier = make_pipeline(
-        StandardScaler(),
-        LinearSVC(dual=True, max_iter=10000, random_state=42)
-    )
+    svm_classifier = LinearSVC(dual=True, max_iter=10000, random_state=42)
     svm_classifier.fit(X_train, y_train)
 
     some_digit_predict = svm_classifier.predict(some_digit)
@@ -46,18 +45,56 @@ def predict_with_sgd(X_train, y_train, some_digit):
     print("Check cross validation results")
     cross_val_score_results = cross_val_score(sgd_classifier, X_train, y_train, cv=3, scoring="accuracy")
     print(np.round(cross_val_score_results, 3))
+    return sgd_classifier
 
+def analyse_errors(model, X_train, y_train):
+    y_train_pred = cross_val_predict(model, X_train, y_train)
+    conf_matrix = confusion_matrix(y_train, y_train_pred)
+    print("Confusion matrix")
+    print(conf_matrix)
+    plt.matshow(conf_matrix, cmap=plt.cm.gray)
+
+    rows_sums = conf_matrix.sum(axis=1, keepdims=True)
+    norm_conf_matrix = conf_matrix / rows_sums
+
+    np.fill_diagonal(norm_conf_matrix, 0)
+    plt.matshow(norm_conf_matrix, cmap=plt.cm.gray)
+
+    cl_a, cl_b = 3, 5
+
+    X_aa = X_train[ (y_train == cl_a) & (y_train_pred == cl_a)]
+    X_ab = X_train[ (y_train == cl_a) & (y_train_pred == cl_b)]
+    X_ba = X_train[ (y_train == cl_b) & (y_train_pred == cl_a)]
+    X_bb = X_train[ (y_train == cl_b) & (y_train_pred == cl_b)]
+
+    simple_plot_digits(X_aa[:25], "3s → 3s (correct)")
+    simple_plot_digits(X_ab[:25], "3s → 5s (incorrect)")
+    simple_plot_digits(X_ba[:25], "5s → 3s (incorrect)")
+    simple_plot_digits(X_bb[:25], "5s → 5s (correct)")
+    plt.show()
+
+def simple_plot_digits(images, title):
+    fig, axes = plt.subplots(5, 5, figsize=(6, 6))
+    for i, ax in enumerate(axes.flat):
+        if i < len(images):
+            ax.imshow(images[i].reshape(28, 28), cmap='binary')
+        ax.axis('off')
+    plt.suptitle(title)
+    plt.tight_layout()
 
 def main():
     X_train, X_test, y_train, y_test = load_data(2000)
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
     some_digit = X_train[15].reshape(1,-1)
-    print(f"Some digit value: {y_train[15]}")
-    print("--"*20, "One versus Rest (LinearSVC)", "--"*20)
-    build_svm(X_train,y_train,some_digit)
-    print("--" * 20, "One versus one (based on LinearSVC)", "--" * 20)
-    predicts_with_one_rest(X_train,y_train,some_digit)
+    # print(f"Some digit value: {y_train[15]}")
+    # print("--"*20, "One versus Rest (LinearSVC)", "--"*20)
+    # build_svm(X_train_scaled,y_train,some_digit)
+    # print("--" * 20, "One versus one (based on LinearSVC)", "--" * 20)
+    # predicts_with_one_rest(X_train,y_train,some_digit)
     print("--" * 20, "SGDClassifier", "--" * 20)
-    predict_with_sgd(X_train,y_train,some_digit)
+    model = predict_with_sgd(X_train,y_train,some_digit)
+    analyse_errors(model, X_train_scaled, y_train)
 
 
 if __name__ == "__main__":

@@ -167,6 +167,50 @@ In scikit-learn:
 
 For RandomForest and NaiveBayes predict_proba() instead of decision_function() are used.
 
+### Error analysis
+
+To check how well classifiers perform, a confusion matrix can be used. Such a matrix can be created by comparing 
+the predictions from cross_val_predict() against the true labels (for example, training labels).
+The correctly classified results appear on the main diagonal.
+Ideally, this graph would show only white elements on the diagonal, with the rest remaining black.
+
+![Confusion_matrix.png](confusion_matrix.png)
+
+As can be seen from the graph above, there are some misclassified cases between 3 and 5, and between 7 and 9. 
+This is clearly visible in the matrix itself:
+
+```
+[[175   0   3   0   1   4   4   0   1   1]
+ [  0 204   3   4   0   2   0   0   3   0]
+ [  1   6 150   7   3   1   7   4  11   0]
+ [  3   4  10 184   0  16   0   3   5   5]
+ [  1   0   3   0 134   0   3   2   2  13]
+ [  2   3   1  12   3 164   4   0   9   2]
+ [  2   3   4   0   2   3 189   0   2   0]
+ [  1   2   2   4   3   0   0 178   1  13]
+ [  3   3   6   7   2   7   4   5 156   7]
+ [  1   4   1   4   5   1   0  14   2 176]]
+```
+
+To better understand the proportion of each misclassified case, the confusion matrix can be normalized by dividing
+each row by its total (the number of instances of that class). 
+Diagonal elements can then be set to zero to focus only on errors.
+
+![Norm_confusion_matrix.png](norm_confusion_matrix.png)
+
+From the graph above, it is clear that column "8" is lighter than the others, meaning that the digit 8 was often 
+misclassified as other digits. The confusion between "3" and "5" is also a common error pattern for the model.
+
+Based on such graphs, potential areas for improvement become clearer — for example,
+extending the dataset or performing feature engineering.
+
+![3_correct_classification.png](3_vs_3.png)
+
+![3_mixed_with_5.png](3_predicted_5.png)
+
+![5_mixed_with_3.png](5_predicted_3.png)
+
+![5_correct_classification.png](5_vs_5.png)
 
 ## Useful Python insights
 
