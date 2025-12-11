@@ -1,33 +1,31 @@
-from sklearn.datasets import fetch_openml
+import os
+import pandas as pd
 
-import matplotlib.pyplot as plt
-import numpy as np
-from sklearn.utils import shuffle
+def fetch_file_data(filename, chapter):
+    """
+    Load housing data from the assets folder.
 
+    Parameters:
+    - filename: str, name of the CSV file
+    - chapter: str, chapter folder inside assets
 
-def load_data(points_number, is_test_split=True):
-    mnist = fetch_openml('mnist_784',version=1, as_frame=False)
-    X, y = mnist["data"], mnist["target"]
-    X, y = shuffle(X, y, random_state=42)
-    y = y.astype(np.int8)
-    if is_test_split:
-        X_train, X_test, y_train, y_test = X[:points_number], X[points_number:], y[:points_number], y[points_number:]
-        return X_train, X_test, y_train, y_test
-    return X, y
+    Returns:
+    - pandas.DataFrame with the housing data
+    """
 
-def convert_to_image(dataset, datapoint_index):
-    numpy_observation = dataset.to_numpy()[datapoint_index]
-    image_dataset = numpy_observation.reshape(28, 28)
-    return numpy_observation, image_dataset
+    script_dir = os.path.dirname(__file__)
+    project_root = os.path.abspath(os.path.join(script_dir, "..", ".."))
+    csv_path = os.path.join(project_root, "assets", chapter, filename)
 
-def visualize_image(image):
-    plt.imshow(image, cmap="binary")
-    plt.axis("off")
-    plt.show()
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(f"CSV file not found: {csv_path}")
 
-
-
-
-
-
-
+    try:
+        data = pd.read_csv(csv_path)
+        return data
+    except pd.errors.EmptyDataError:
+        raise ValueError(f"The file {csv_path} is empty.")
+    except pd.errors.ParserError:
+        raise ValueError(f"The file {csv_path} could not be parsed.")
+    except Exception as e:
+        raise RuntimeError(f"Unexpected error reading {csv_path}: {e}")

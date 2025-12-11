@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-from src.chapter_2.data_loading import *
+from src.chapter_3.data_loading import *
 from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import StratifiedKFold
 from sklearn.base import clone

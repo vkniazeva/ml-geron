@@ -212,6 +212,31 @@ extending the dataset or performing feature engineering.
 
 ![5_correct_classification.png](5_vs_5.png)
 
+### Multilabel classification
+
+Multilabel classification refers to tasks where a single instance can simultaneously belong to multiple binary categories.
+For example, an MNIST digit can be classified as odd or even and at the same time as greater or less than 7.
+In this setting, each label is an independent binary attribute.
+
+To evaluate such models, one typically computes a performance metric (e.g., F1-score) independently for each label, 
+and then aggregates the results.
+A weighted average is often preferred when the labels are imbalanced, since metrics corresponding to more frequent labels 
+should contribute more to the overall score.
+
+### Multioutput classification
+
+Multioutput classification refers to models that produce several distinct outputs for each input instance.
+Unlike multilabel classification, each output may have its own type:
+
+- binary classification,
+- multiclass classification,
+- or even regression (multioutput regression).
+
+Evaluation follows the same principles as in multilabel tasks:
+each output is assessed separately, and the metrics are then averaged 
+(using either a simple macro average or a weighted average that accounts for class imbalance across outputs).
+
+
 ## Useful Python insights
 
 - to_numpy() - conversing an object to a np.ndarray. If from DataFrame, column names are removed
@@ -227,3 +252,4 @@ extending the dataset or performing feature engineering.
 - roc_curve() - plot a ROC curve for given labels and scores (sklearn.metrics)
 - predict_proba() - array of rows as instances and columns as classes filled with probabilities of instance to belong to a given class
 - roc_auc_score() - calculates an area under curve (sklearn.metrics)
+- np.c_ - concatenates multiple arrays by the second axis (columns)

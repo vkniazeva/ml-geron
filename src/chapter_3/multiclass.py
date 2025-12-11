@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, f1_score
 from sklearn.model_selection import cross_val_score, cross_val_predict
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
@@ -80,7 +81,41 @@ def simple_plot_digits(images, title):
             ax.imshow(images[i].reshape(28, 28), cmap='binary')
         ax.axis('off')
     plt.suptitle(title)
-    plt.tight_layout()
+    plt.suptitle(title)
+
+
+def support_multilabel(X_train, y_train, some_digit):
+    y_train_large = (y_train >= 7)
+    y_train_odd = (y_train % 2 == 1)
+    y_multilabel = np.c_[y_train_large, y_train_odd]
+
+    knn_classificator = KNeighborsClassifier()
+    knn_classificator.fit(X_train, y_multilabel)
+
+    some_digit_predict = knn_classificator.predict(some_digit)
+    print(f"Multilabel classification results: {some_digit_predict}")
+
+    y_train_knn_pred = cross_val_predict(knn_classificator, X_train, y_multilabel, cv=3)
+    score = f1_score(y_multilabel, y_train_knn_pred, average="weighted")
+    print(f"Multilabel classification f1: {round(score, 2)}")
+
+def support_multioutput(X_train, X_test):
+    noise = np.random.randint(0, 100, (len(X_train), 784))
+    X_train_mod = X_train + noise
+    noise = np.random.randint(0, 100, (len(X_test), 784))
+    X_test_mod = X_test + noise
+    Y_train_mod = X_train
+    Y_test_mod = X_test
+
+    knn_classificator = KNeighborsClassifier()
+    knn_classificator.fit(X_train_mod, Y_train_mod)
+    clean_digit = knn_classificator.predict([X_test_mod[0]])[0]
+    simple_plot_digits(
+        [X_test_mod[0], clean_digit],
+        'Noisy (left) vs Restored (right)'
+    )
+    plt.show()
+
 
 def main():
     X_train, X_test, y_train, y_test = load_data(2000)
@@ -92,9 +127,11 @@ def main():
     # build_svm(X_train_scaled,y_train,some_digit)
     # print("--" * 20, "One versus one (based on LinearSVC)", "--" * 20)
     # predicts_with_one_rest(X_train,y_train,some_digit)
-    print("--" * 20, "SGDClassifier", "--" * 20)
-    model = predict_with_sgd(X_train,y_train,some_digit)
-    analyse_errors(model, X_train_scaled, y_train)
+    # print("--" * 20, "SGDClassifier", "--" * 20)
+    # model = predict_with_sgd(X_train,y_train,some_digit)
+    # analyse_errors(model, X_train_scaled, y_train)
+    support_multilabel(X_train, y_train, some_digit)
+    support_multioutput(X_train, X_test)
 
 
 if __name__ == "__main__":
