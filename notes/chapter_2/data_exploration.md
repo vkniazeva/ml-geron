@@ -16,11 +16,11 @@ alpha – transparency level of the points
 
 **Without alpha**
 
-![Geo data.png](../assets/chapter_1/geographical_data.png)
+![Geo data.png](../assets/chapter_2/geographical_data.png)
 
 **With alpha = 0.1**
 
-![Geo data with alpha.png](../assets/chapter_1/geo_data_alpha.png)
+![Geo data with alpha.png](../assets/chapter_2/geo_data_alpha.png)
 
 The alpha parameter allows adjusting data point transparency, 
 highlighting regions with the highest density concentration. 
@@ -36,7 +36,7 @@ locations like Los Angeles and San Diego.
 * cmap – a colormap used for c; in this case "jet" provides a color gradient.
 * colorbar=True – adds a color bar that helps interpret the colors.
 
-![Geo data in context of other features.png](../assets/chapter_1/geo_data_with_features.png)
+![Geo data in context of other features.png](../assets/chapter_2/geo_data_with_features.png)
 
 From the graph, it is clear that the closer to the Bay Area, the higher the housing prices and population density become.
 
@@ -73,7 +73,7 @@ To visualize relationships between multiple features, we can use scatter_matrix 
 
 Since only a few features show noticeable correlation with the target, we focus on the top 4 attributes:
 
-![Scatter matrix income.png](../assets/chapter_1/scatter_matrix_income.png)
+![Scatter matrix income.png](../assets/chapter_2/scatter_matrix_income.png)
 
 The scatter plots show that median_income has the strongest influence on the target variable:
 as income increases, so does housing price.
@@ -83,7 +83,7 @@ It also reveals several horizontal lines (e.g., at $450k, $350k), which indicate
 These outlier-like rows do not represent real market variety 
 and might be removed or handled separately during data cleaning.
 
-![Scatter plot income-target.png](../assets/chapter_1/scatter_plot_income_target.png)
+![Scatter plot income-target.png](../assets/chapter_2/scatter_plot_income_target.png)
 
 ## Feature Engineering
 

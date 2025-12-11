@@ -9,7 +9,7 @@ from joblib import dump
 from pathlib import Path
 
 def run_workflow():
-    housing = fetch_file_data("housing.csv", "chapter_1")
+    housing = fetch_file_data("housing.csv", "chapter_2")
     X_train, X_test, y_train, y_test = prepare_train_test(housing)
 
     # file storing

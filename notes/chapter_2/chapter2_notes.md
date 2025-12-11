@@ -73,7 +73,7 @@ count, mean, std. min, percentiles, max)
 * hist() - matplotlit.pyplot - drawing a histogram: bin - detalization (higher -> more details),
 figsize - graph size (i.e. 20 - width, 15 - high)
 
-![histogram.png](../assets/chapter_1/histogram.png)
+![histogram.png](../assets/chapter_2/histogram.png)
 
 * train_test_split() - sklearn.model_selection - supports a dataset splitting to
 a train and test ones. Params: dataset, test_size, random_state (repetitive split)
@@ -81,7 +81,7 @@ a train and test ones. Params: dataset, test_size, random_state (repetitive spli
 Parameters: data array, bins (number of intervals or bin edges),
 labels (optional names for the intervals).
 
-![histogram_income_cat.png](../assets/chapter_1/histogram_income_cat.png)
+![histogram_income_cat.png](../assets/chapter_2/histogram_income_cat.png)
 
 * loc - pd - a pandas function for selecting data by labels or by boolean arrays
 * StratifiedShuffleSplit - sklearn.model_selection - creates train/test splits while preserving 
