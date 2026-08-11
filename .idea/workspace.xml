@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8881506e-a6fa-408c-8d33-71b858d36287" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ml-geron.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/chapter_4/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/chapter_4/exploration.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="8881506e-a6fa-408c-8d33-71b858d36287" name="Changes" comment="started chapter 4" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,12 +177,25 @@
       <workItem from="1764972136768" duration="26747000" />
       <workItem from="1765578924254" duration="2437000" />
       <workItem from="1786481477814" duration="67000" />
-      <workItem from="1786481546585" duration="4224000" />
+      <workItem from="1786481546585" duration="4712000" />
     </task>
+    <task id="LOCAL-00001" summary="started chapter 4">
+      <option name="closed" value="true" />
+      <created>1786486594180</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1786486594180</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="started chapter 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="started chapter 4" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ml_geron_clean$main.coverage" NAME="main Coverage Results" MODIFIED="1765578932994" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
