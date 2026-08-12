@@ -37,3 +37,28 @@ where:
 Huber works like a threshold error computation switcher: on the small errors (below the threshold) it behaves like MSE,
 and on the larger errors as MAE. So model optimization does not assign huge penalties to the big error values.
 
+## Stochastic Gradient descent
+
+Gradient descent is the most common optimization algorithm, capable of finding an optimal solution for a wide range of tasks. 
+The core idea lies in the iterative adaptation of parameters to reach the minimum of a given cost function. 
+Gradient descent computes the local gradient (a vector of partial derivatives) and updates the parameters in the direction of the steepest decrease.
+When gradient = 0 -> the minimum is found.
+
+The learning rate essentially controls how big of a step we take to reach the minimum of the cost function.
+
+The MSE cost function for linear regression is convex, which provides the following advantages:
+- has a single global minimum (no local minima)
+- continuous and differentiable everywhere
+- the gradient decreases monotonically
+
+> **_NOTE:_** feature scaling is essential for a minimum search
+
+
+## Batch Gradient Descent
+
+- Batch Gradient Descent: uses all examples to calculate gradient, updates weights once per epoch (stable, slow)
+- Stochastic Gradient Descent:  uses one example at a time, updates weights immediately (fast, noisy)
+
+
+
+
