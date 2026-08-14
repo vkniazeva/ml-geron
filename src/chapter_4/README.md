@@ -37,7 +37,7 @@ where:
 Huber works like a threshold error computation switcher: on the small errors (below the threshold) it behaves like MSE,
 and on the larger errors as MAE. So model optimization does not assign huge penalties to the big error values.
 
-## Stochastic Gradient descent
+## Gradient descent
 
 Gradient descent is the most common optimization algorithm, capable of finding an optimal solution for a wide range of tasks. 
 The core idea lies in the iterative adaptation of parameters to reach the minimum of a given cost function. 
@@ -54,10 +54,31 @@ The MSE cost function for linear regression is convex, which provides the follow
 > **_NOTE:_** feature scaling is essential for a minimum search
 
 
-## Batch Gradient Descent
+## Types of Gradient Descent
 
 - Batch Gradient Descent: uses all examples to calculate gradient, updates weights once per epoch (stable, slow)
 - Stochastic Gradient Descent:  uses one example at a time, updates weights immediately (fast, noisy)
+
+In practice, SGD achieves better results with irregular cost functions.
+Due to its stochastic nature, SGD has a higher probability of discovering more optimal weights. 
+Its movements are non-deterministic and allow it to  escape local minima. 
+BGD, however, typically becomes trapped when it encounters a local minimum.
+
+Shuffling is crucial for SGD because it requires samples to be independent and identically distributed (IID). 
+Without shuffling, ordered data introduces bias in gradient estimates. 
+For example, if positive and negative samples are grouped together, the gradient will be skewed in one direction,
+leading to unstable convergence and potentially suboptimal solutions.
+
+## Learning rate
+
+Learning rate adjustment improves the model's training process. 
+A common approach is to start with a higher learning rate, allowing optimization algorithms to take larger steps toward the minimum. 
+However, as the algorithm approaches the minimum, the gradient becomes smaller, resulting in naturally smaller step sizes. 
+To ensure precise convergence and avoid overshooting the global minimum, the learning rate should be further decreased in later stages of training.
+
+'Learning schedule' stands for a function which determines the learning rate on every iteration.
+
+
 
 
 
